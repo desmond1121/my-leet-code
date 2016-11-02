@@ -1,0 +1,6 @@
+*.out
+*.exe
+cpp-codes/project
+.idea/
+build/
+*.iml
