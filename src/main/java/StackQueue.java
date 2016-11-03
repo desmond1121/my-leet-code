@@ -1,47 +1,50 @@
-import java.util.List;
 import java.util.Stack;
 
 /**
  * 232. Implement Queue using Stacks
  * {@link "https://leetcode.com/problems/implement-queue-using-stacks/"}
- *
+ * <p/>
  * Created by desmond on 11/2/16.
  */
-class StackQueue {
+public class StackQueue {
 
-    List<Stack<Integer>> stacks;
-    int active = 0;
+    Stack<Integer>[] stacks;
+    int pushStack = 0;
+    int popStack = 1;
 
     public StackQueue() {
-        stacks.add(new Stack<Integer>());
-        stacks.add(new Stack<Integer>());
+        stacks = new Stack[2];
+        stacks[0] = new Stack<Integer>();
+        stacks[1] = new Stack<Integer>();
     }
 
     // Push element x to the back of queue.
     public void push(int x) {
-        Stack<Integer> next = stacks.get(1 - active);
-        next.push(x);
-
-        Stack<Integer> stack = stacks.get(active);
-        while (!stack.isEmpty()) {
-            Integer i = stack.pop();
-            next.push(i);
-        }
-        active = 1 - active;
+        stacks[pushStack].push(x);
     }
 
     // Removes the element from in front of queue.
     public void pop() {
-        stacks.get(active).pop();
+        migrateIfpopEmpty();
+        stacks[popStack].pop();
     }
 
     // Get the front element.
     public int peek() {
-        return stacks.get(active).peek();
+        migrateIfpopEmpty();
+        return stacks[popStack].peek();
+    }
+
+    private void migrateIfpopEmpty() {
+        if (stacks[popStack].empty()) {
+            while (!stacks[pushStack].empty()) {
+                stacks[popStack].push(stacks[pushStack].pop());
+            }
+        }
     }
 
     // Return whether the queue is empty.
     public boolean empty() {
-        return stacks.get(active).empty();
+        return stacks[popStack].empty() && stacks[pushStack].empty();
     }
 }
