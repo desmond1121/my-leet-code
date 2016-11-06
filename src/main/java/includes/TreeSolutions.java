@@ -1,12 +1,14 @@
 package includes;
 
 /**
+ * Some tree solution.
+ *
  * Created by desmond on 11/2/16.
  */
 public class TreeSolutions {
 
-    private TreeNode findNode(TreeNode root, int key) {
 
+    private TreeNode findNodeInBst(TreeNode root, int key) {
         TreeNode node = root;
 
         while (node != null && node.val != key) {
@@ -21,7 +23,7 @@ public class TreeSolutions {
     }
 
     /**
-     * 450. Delete Node in a BST
+     * [WIP] 450. Delete Node in a BST
      *
      * Url: https://leetcode.com/problems/delete-node-in-a-bst/
      */
@@ -46,56 +48,34 @@ public class TreeSolutions {
             }
         }
 
+        TreeNode alt = null;
         if (node != null) {
-            if (isLeft) {
-                if (node.right == null) {
-                    node = node.left;
-                } else if (node.left != null){
-                    TreeNode candidate = node.left;
-                    while (candidate.right != null) {
-                        candidate = candidate.right;
-                    }
-                    candidate.right = node.right;
-                } else if (node.right.val < parent.val){
-                    node = node.right;
-                } else {
-                    TreeNode candidate = parent;
-                    while (candidate.right != null) {
-                        candidate = candidate.right;
-                    }
-                    candidate.right = node.right;
-                }
+            if (node.right == null) {
+                alt = node.left;
+            } else if (node.right.left == null){
+                alt = node.right;
+                alt.left = node.left;
             } else {
-                if (node.left == null) {
-                    node = node.right;
-                } else if (node.right != null){
-                    TreeNode candidate = node.right;
-                    while (candidate.left != null) {
-                        candidate = candidate.left;
-                    }
-                    candidate.left = node.left;
-                } else if (node.left.val >= parent.val){
-                    node = node.left;
-                } else {
-                    TreeNode candidate = parent;
-                    while (candidate.left != null) {
-                        candidate = candidate.left;
-                    }
-                    candidate.left = node.left;
+                TreeNode altP = node.right;
+                while (altP.left.left != null) {
+                    altP = altP.left;
                 }
+                alt = altP.left;
+                altP.left = null;
+                alt.left = node.left;
+                alt.right = node.right;
             }
         }
 
-        if (isLeft) {
-            parent.left = node;
+        if (parent == root) {
+            return alt;
         } else {
-            parent.right = node;
+            if (isLeft) {
+                parent.left = alt;
+            } else {
+                parent.right = alt;
+            }
+            return root;
         }
-
-        return root;
-    }
-
-    public static void main(String[] args) {
-
     }
 }

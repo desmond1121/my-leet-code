@@ -34,5 +34,5 @@ public:
 };
 
 int main() {
-    cout<<Solution::longestPalindrome("abccccdd") << endl;
+    cout << Solution::longestPalindrome("abccccdd") << endl;
 }
