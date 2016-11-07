@@ -20,4 +20,9 @@ public class TreeNode {
     public TreeNode(int x) {
         val = x;
     }
+
+    @Override
+    public String toString() {
+        return "Node [" + val + "] \n\tLeft:" + left + "\n\tRight: " + right;
+    }
 }

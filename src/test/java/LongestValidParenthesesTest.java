@@ -10,13 +10,15 @@ public class LongestValidParenthesesTest {
     
     @Test
     public void testLongestValidParentheses() throws Exception {
-        assertEquals(lvp.longestValidParentheses("()()"), 4);
-        assertEquals(lvp.longestValidParentheses(")()())()()("), 4);
-        assertEquals(lvp.longestValidParentheses("(()))())("), 4);
-        assertEquals(lvp.longestValidParentheses("()((((((((())("), 4);
-        assertEquals(lvp.longestValidParentheses("(()"), 2);
-        assertEquals(lvp.longestValidParentheses(""), 0);
-        assertEquals(lvp.longestValidParentheses("(()()(()))"), 10);
-        assertEquals(lvp.longestValidParentheses(")()())"), 4);
+        assertEquals(4, lvp.longestValidParentheses("()()"));
+        assertEquals(2, lvp.longestValidParentheses("(()(((()"));
+        assertEquals(4, lvp.longestValidParentheses(")()())()()("));
+        assertEquals(10, lvp.longestValidParentheses(")()(((())))("));
+        assertEquals(4, lvp.longestValidParentheses("(()))())("));
+        assertEquals(4, lvp.longestValidParentheses("()((((((((())("));
+        assertEquals(2, lvp.longestValidParentheses("(()"));
+        assertEquals(0, lvp.longestValidParentheses(""));
+        assertEquals(10, lvp.longestValidParentheses("(()()(()))"));
+        assertEquals(4, lvp.longestValidParentheses(")()())"));
     }
 }
