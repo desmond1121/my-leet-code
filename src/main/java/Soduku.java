@@ -2,12 +2,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Problems about soduku.
+ *
  * Created by desmond on 11/7/16.
  */
 public class Soduku {
 
     private Map<Character, Object> map = new HashMap<Character, Object>();
 
+    /**
+     * 36. Valid Sudoku
+     *
+     * {@link "https://leetcode.com/problems/valid-sudoku/"}
+     */
     public boolean isValidSudoku(char[][] board) {
         for (int i = 0; i < 9; i++) {
             map.clear();
